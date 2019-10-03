@@ -1,0 +1,101 @@
+:root {
+    --gap: 1rem;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Architects Daughter', cursive;
+    display: grid;
+    grid-gap:  var(--gap);
+    margin: 0;
+    padding: var(--gap);
+    grid-template:
+        "header"min-content "main"auto "footer"min-content;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    position: relative;
+}
+
+section {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+.layout-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding:  calc(var(--gap) * 1.5);
+}
+
+x-login {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.wc-module {
+    background-color: rgb(226, 226, 250)
+}
+
+.react-module {
+    background-color: rgb(226, 250, 226)
+}
+
+.vue-module {
+    background-color: rgb(250, 226, 226)
+}
+
+.svelte-module {
+    background-color: rgb(250, 250, 226)
+}
+
+.catalogue {
+    display: grid;
+    grid-gap: var(--gap);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr) );
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.catalogue-item {
+    display: block;
+    height: 160px;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.layout-item {
+    display: block;
+    height: calc(100% - (2 * var(--gap)));
+    width: calc(100% - (2 * var(--gap)));
+    margin: 0;
+    padding: 0;
+    padding: var(--gap);
+}
+
+.catalogue-title{
+    margin: 0;
+    padding: 0;
+}

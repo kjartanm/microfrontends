@@ -1,0 +1,22 @@
+{
+  "name": "domain2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "NODE_ENV=production rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "haunted": "^4.5.4",
+    "lit-html": "^1.1.2",
+    "rollup": "^1.21.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-svg": "^2.0.0"
+  },
+  "dependencies": {
+  }
+}

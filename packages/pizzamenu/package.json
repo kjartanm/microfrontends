@@ -1,0 +1,40 @@
+{
+  "name": "domain1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production rollup -c",
+    "predev": "cp ../home/style/index.css ./preview/index.css && cp ../home/store.js ./preview/store.js &&  echo \"test\"",
+    "dev": "rollup -w -c --environment DEVELOPMENT",
+    "start": "http-server ./preview -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "rollup-plugin-terser": "^5.1.2",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-proptypes": "^1.0.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "styled-jsx": "^3.2.2"
+  }
+}

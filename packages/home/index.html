@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Micro frontends</title>
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="./static/style/index.css" rel="stylesheet">
+    <script async type="module" src="./modules/login"></script>
+    <script type="module">
+        import { SvelteHeader } from './modules/header';
+        class HeaderModule extends HTMLElement {
+            connectedCallback() {
+                const root = document.createElement('div');
+                root.classList.add('svelte-module');
+                this.appendChild(root);
+                SvelteHeader(root);
+            }
+        }
+        customElements.define('x-header', HeaderModule);
+    </script>
+    <script type="module">
+        class PizzaMenu extends HTMLElement {
+            connectedCallback() {
+                const root = document.createElement('section');
+                root.classList.add('react-module');
+                this.appendChild(root);
+                import('./modules/pizzamenu')
+                    .then((module) => {
+                        module.ReactApp(root);
+                    });
+            }
+        }
+        customElements.define('x-pizzamenu', PizzaMenu);
+    </script>
+    <script type="module">
+        class OrderPizza extends HTMLElement {
+            connectedCallback() {
+                const root = document.createElement('div');
+                this.appendChild(root);
+                import('./modules/order')
+                    .then((module) => {
+                        module.VueApp(root);
+                    });
+            }
+        }
+        customElements.define('x-orderpizza', OrderPizza);
+    </script>
+    <script type="module">
+        class Profile extends HTMLElement {
+            connectedCallback() {
+                const root = document.createElement('section')
+                root.classList.add('svelte-module');
+                this.appendChild(root);
+                import('./modules/profile')
+                    .then((module) => {
+                        module.SvelteApp(root);
+                    });
+            }
+        }
+        customElements.define('x-profile', Profile);
+    </script>
+</head>
+
+<body>
+    <header>
+        <x-header></x-header>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+        <wired-card class="layout-container"><h4>Contact us: support@tropicalpizzas.com</h4></wired-card>
+    </footer>
+
+    <script type="module">
+        import { Router } from 'https://unpkg.com/@vaadin/router';
+        import { onKernelKey } from './modules/kernel';
+        const mainOutlet = document.querySelector('main');
+        const router = new Router(mainOutlet);
+
+        router.setRoutes([
+            { path: '/', component: 'x-login' },
+            { path: '/pizzamenu', component: 'x-pizzamenu' },
+            { path: '/orderpizza', component: 'x-orderpizza' },
+            { path: '/profile', component: 'x-profile' }
+        ]);
+
+        onKernelKey('change:customerid', customerid => {
+            console.log("customerid", customerid)
+            if(customerid != null){
+                Router.go('/pizzamenu');
+            }
+        });
+    </script>
+    <script src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.js"></script>
+</body>
+
+</html>
