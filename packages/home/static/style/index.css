@@ -27,6 +27,8 @@ body {
 
 main {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 section {
@@ -67,7 +69,10 @@ x-login {
 
 .order {
     display: grid;
-    grid-template-columns: 400px 400px;
+    position: absolute;
+    top: calc(var(--gap) * 1.5);
+    bottom: calc(var(--gap) * 1.5);
+    grid-template-columns: 450px 400px;
     column-gap: 50px;
     row-gap: 15px;
     grid-template-areas:    "head head"
@@ -81,18 +86,29 @@ x-login {
 
 .order-list {
     grid-area: order;
+    max-height: 100%;
+    overflow-y: scroll;
 }
 
 .order-name {
-    width: 200px;
+    width: 220px;
 }
 
 .order-price {
     width: 50px;
 }
 
+.order-number {
+    width: 120px;
+}
+
 .order-number-input {
-    width: 30px;
+    width: 25px;
+    height:  25px;
+    line-height: 25px;
+    text-align: center;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 1rem;
 }
 
 .order-extra  {
@@ -145,17 +161,17 @@ x-login {
     padding: var(--gap);
 }
 
-.catalogue-title{
+.catalogue-title {
     margin: 0;
     padding: 0;
 }
 
-.catalogue-description{
+.catalogue-description {
     margin: 0;
     padding: 0;
 }
 
-.catalogue-bar{
+.catalogue-bar {
     margin: 0;
     padding: 0;
     height: 30px;
@@ -164,7 +180,7 @@ x-login {
     bottom: 15px;
 }
 
-.pizza-ill{
+.pizza-ill {
     float: right;
     width: 55px;
     height: 55px;
