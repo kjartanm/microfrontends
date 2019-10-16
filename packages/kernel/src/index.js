@@ -2,7 +2,7 @@ import mitt from 'mitt'
 
 let cart = [
     {menuid: 10, number: 1, name: 'Classic Hawaii', price: 15 },
-    {menuid: 13, number: 2, name: 'Apple Crust', price: 30}
+    {menuid: 13, number: 1, name: 'Apple Crust', price: 30}
 ];
 
 let state = {customerid: null, cart };
@@ -10,6 +10,7 @@ const emitter = mitt();
 
 export const updateSharedKernel = function (newState) {
     let oldval = null, change = false;
+    console.log("up", newState)
     if (typeof newState === 'object') {
         let obj = newState;
         for (let key in obj) {

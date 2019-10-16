@@ -61,7 +61,56 @@ x-login {
 }
 
 .vue-module {
-    background-color: rgb(250, 226, 226)
+    background-color: rgb(250, 226, 226);
+
+}
+
+.order {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    column-gap: 50px;
+    row-gap: 15px;
+    grid-template-areas:    "head head"
+                            "order extra"
+                            "order submit";
+}
+
+.order-head {
+    grid-area: head;
+}
+
+.order-list {
+    grid-area: order;
+}
+
+.order-name {
+    width: 200px;
+}
+
+.order-price {
+    width: 50px;
+}
+
+.order-number-input {
+    width: 30px;
+}
+
+.order-extra  {
+    grid-area: extra;
+}
+
+.order-title-extra {
+    margin: 0;
+}
+
+.order-extra-item {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.order-shoppingcart {
+    width: 35px;
+    height: 35px;
 }
 
 .svelte-module {
@@ -88,6 +137,7 @@ x-login {
 
 .layout-item {
     display: block;
+    position: relative;
     height: calc(100% - (2 * var(--gap)));
     width: calc(100% - (2 * var(--gap)));
     margin: 0;
@@ -98,4 +148,36 @@ x-login {
 .catalogue-title{
     margin: 0;
     padding: 0;
+}
+
+.catalogue-description{
+    margin: 0;
+    padding: 0;
+}
+
+.catalogue-bar{
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    width: calc(100% - (2 * var(--gap)));
+    position: absolute;
+    bottom: 15px;
+}
+
+.pizza-ill{
+    float: right;
+    width: 55px;
+    height: 55px;
+}
+
+.catalogue-shoppingcart {
+    float: right;
+    width: 35px;
+    height: 35px;
+}
+
+.cart-ill {
+    color: rgb(179, 76, 139);
+    width: 20px;
+    height: 20px;
 }

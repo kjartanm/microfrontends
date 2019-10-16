@@ -72,7 +72,15 @@
 
     </main>
     <footer>
-        <wired-card class="layout-container"><h4>Contact us: support@tropicalpizzas.com</h4></wired-card>
+        <wired-card class="layout-container">
+            <img style="vertical-align: middle" src="/static/assets/restaurant_menu-24px.svg"> 
+            Contact us: support@tropicalpizzas.com 
+            <span> # color legend: </span> 
+            <wired-card class="svelte-module"> svelte </wired-card>
+            <wired-card class="vue-module"> vue </wired-card>
+            <wired-card class="react-module"> react </wired-card>
+            <wired-card class="wc-module"> wc-libs </wired-card>
+        </wired-card>
     </footer>
 
     <script type="module">
@@ -89,13 +97,12 @@
         ]);
 
         onKernelKey('change:customerid', customerid => {
-            console.log("customerid", customerid)
             if(customerid != null){
                 Router.go('/pizzamenu');
             }
         });
     </script>
-    <script src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.js"></script>
+    <!--script src="https://unpkg.com/wired-elements@latest/dist/wired-elements.bundled.js"></script-->
 </body>
 
 </html>

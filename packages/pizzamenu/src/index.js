@@ -4,93 +4,103 @@ import ReactDOM from 'react-dom';
 const CatalogueContext = React.createContext();
 
 const exampleItems = [
-  { id: 10, name: 'Classic Hawaii', description: "The one that started it all!", price: 15 },
-  { id: 11, name: 'Pineapple Bonanza', description: "Not just the ordinarily Hawaii :)", price: 20 },
-  { id: 12, name: 'Citrus Crush', description: "Orange, Lime and Lemon.", price: 25 },
-  { id: 13, name: 'Apple Crust', description: "Cheese and Apple slices.", price: 30 },
-  { id: 14, name: 'Pear & Fear', description: "Do you dare? Pear and chili sauce!", price: 35 },
-  { id: 15, name: 'Banana Peanut Butter', description: "For the Elvis and Banana lovers.", price: 40 },
-  { id: 16, name: 'Strawberry Field', description: "Strawberries, basil and garlic vinegar!", price: 50 },
-  { id: 17, name: 'The Full Fruit Salad', description: "Do you think you are worth it?", price: 75 },
+    { id: 10, name: 'Classic Hawaii', description: "The one that started it all!", price: 15 },
+    { id: 11, name: 'Pineapple Bonanza', description: "Not just the ordinarily Hawaii :)", price: 20 },
+    { id: 12, name: 'Citrus Crush', description: "Orange, Lime and Lemon.", price: 25 },
+    { id: 13, name: 'Apple Crust', description: "Cheese and Apple slices.", price: 30 },
+    { id: 14, name: 'Pear & Fear', description: "Do you dare? Pear and chili sauce!", price: 35 },
+    { id: 15, name: 'Banana Peanut Butter', description: "For the Elvis and Banana lovers.", price: 40 },
+    { id: 16, name: 'Strawberry Field', description: "Strawberries, basil and garlic vinegar!", price: 50 },
+    { id: 17, name: 'The Full Fruit Salad', description: "Do you think you are worth it?", price: 75 },
 ]
 
 const CatalogueProvider = (props) => {
-  const [cart, setCart] = useState([]);
-  const [customerid, setCustomerid] = useState(null);
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    //This is where api calls for pizzamenu could be handled, for now, faking it!
-    setItems(exampleItems);
-  }, [customerid]);
-  useEffect(() => {
-    import('./kernel')
-      .then((module) => {
-        module.onKernelKey('change:customerid', customerid => {
-          setCustomerid(customerid);
-        });
-        const customerid = module.getSharedKernel('customerid');
-        if (customerid != null) {
-          setCustomerid(customerid);
-        }
-        module.onKernelKey('change:cart', cart => {
-          setCart(cart);
-        });
-        const cart = module.getSharedKernel('cart');
-        if(cart != null){
-          setCart(module.getSharedKernel('cart'));
-        }
-      });
-  }, []);
+    const [cart, setCart] = useState([]);
+    const [customerid, setCustomerid] = useState(null);
+    const [items, setItems] = useState([]);
 
-  const addToCart = itemid => {
-    console.log('add to cart')
-  }
+    useEffect(() => {
+        //This is where api calls for pizzamenu could be handled, for now, faking it!
+        setItems(exampleItems);
+    }, [customerid]);
 
-  const removeFromCart = itemid => {
-    console.log('add to cart')
-  }
+    useEffect(() => {
+        import('./kernel')
+            .then((module) => {
+                module.onKernelKey('change:customerid', _customerid => {
+                    setCustomerid(_customerid);
+                });
+                const _customerid = module.getSharedKernel('customerid');
+                if (_customerid != null) {
+                    setCustomerid(_customerid);
+                }
+                module.onKernelKey('change:cart', _cart => {
+                     setCart(_cart);
+                });
+                const _cart = module.getSharedKernel('cart');
+                if (_cart != null) {
+                    setCart(module.getSharedKernel('cart'));
+                }
+            });
+    }, []);
 
-  return (
-    <CatalogueContext.Provider value={[items, cart, addToCart, removeFromCart]}>
-      {props.children}
-    </CatalogueContext.Provider>
-  );
+    const addToCart = (id, name, price) => {
+        const _cart = cart.concat({ menuid: id, number: 1, name, price })
+        import('./kernel').then((Module) => {
+            Module.updateSharedKernel({ cart: _cart });
+        })
+    }
+
+    const removeFromCart = id => {
+        const _cart = cart.filter(item => item.menuid != id)
+        import('./kernel').then((Module) => {
+            Module.updateSharedKernel({ cart: _cart });
+        })
+    }
+
+    return (
+        <CatalogueContext.Provider value={[items, cart, addToCart, removeFromCart]}>
+            {props.children}
+        </CatalogueContext.Provider>
+    );
 }
 
 function App() {
-  const addItemToCart = itemid => {
-    console.log("add item to cart")
-  }
 
-  const removeItemFromToCart = itemid => {
-    console.log("remove item from cart")
-  }
-
-  return (
-    <CatalogueProvider>
-      <wired-card class="layout-container">
-        <h2>Find Your Favorite Pizza!</h2>
-        <Items></Items>
-      </wired-card>
-    </CatalogueProvider>
-  );
+    return (
+        <CatalogueProvider>
+            <wired-card class="layout-container">
+                <h2>Find Your Favorite Pizza!</h2>
+                <Items></Items>
+            </wired-card>
+        </CatalogueProvider>
+    );
 }
 
-function Item({ description, name, id, cart, addToCart, removeFromCart }) {
-  return (
-    <li style={{ border: '0px solid red' }} className="catalogue-item" key={id}><wired-card class="layout-item">
-      <h3 className="catalogue-title">{name}</h3>
-      <div className="catalogue-description">{description}</div>
-    </wired-card></li>)
+function Item({ description, name, id, price, cart, addToCart, removeFromCart }) {
+
+    const isInCart = cart.findIndex(el => el.menuid == id) > -1;
+
+    return (
+        <li className="catalogue-item" key={id}><wired-card class="layout-item">
+            <h3 className="catalogue-title"> <img className="pizza-ill" src="/static/assets/pizza.svg"></img> {name}</h3>
+            <div className="catalogue-description">{description}</div>
+            <div className="catalogue-bar">Price: {price},- $
+                {isInCart
+                    ? <wired-icon-button onClick={() => removeFromCart(id)} class="catalogue-shoppingcart"> <img className="cart-ill" src="/static/assets/remove_shopping_cart-24px.svg"></img> </wired-icon-button>
+                    : <wired-icon-button onClick={() => addToCart(id, name, price)} class="catalogue-shoppingcart"> <img className="cart-ill" src="/static/assets/add_shopping_cart-24px.svg"></img> </wired-icon-button>
+                }
+            </div>
+        </wired-card></li>)
 }
 
 function Items() {
-  const [items, cart, addToCart, removeFromCart] = useContext(CatalogueContext);
-  return (
-    <ul className="catalogue">
-      {items.map(function ( item ) {
-        return <Item key={item.id} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} {...item} />;
-      })}
-    </ul>);
+    const [items, cart, addToCart, removeFromCart] = useContext(CatalogueContext);
+    return (
+        <ul className="catalogue">
+            {items.map(function (item) {
+                return <Item key={item.id} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} {...item} />;
+            })}
+        </ul>);
 }
 export const ReactApp = (el) => ReactDOM.render(App(), el);

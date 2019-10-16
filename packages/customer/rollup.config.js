@@ -4,7 +4,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
-
+function stopDynamicImport() {
+	return {
+		name: 'stop-dynamic-import', // this name will show up in warnings and errors
+		resolveDynamicImport(source) {
+			return false
+		}
+	};
+}
 export default [
 	{
 		input: 'src/index.js',
@@ -15,6 +22,7 @@ export default [
 			file: 'public/profile.app.js'
 		},
 		plugins: [
+			stopDynamicImport (),
 			svelte({
 				// enable run-time checks when not in production
 				dev: !production,
@@ -38,6 +46,7 @@ export default [
 			file: 'public/header.app.js'
 		},
 		plugins: [
+			stopDynamicImport (),
 			svelte({
 				// enable run-time checks when not in production
 				dev: !production,

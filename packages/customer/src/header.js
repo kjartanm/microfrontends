@@ -1,10 +1,11 @@
 import Header from './Header.svelte';
 
+
 export const SvelteHeader = (el)=>{
 	new Header({
 		target: el,
 		props: {
-			title: 'My Header'
+			title: 'Tropical Pizzas'
 		}
 	})
 };

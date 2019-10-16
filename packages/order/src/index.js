@@ -21,11 +21,12 @@ export const store = new Vuex.Store({
         cart: state => state.cart,
     },
     actions: {
-        updateCart: ({ commit }, { cart }) => commit('CART', cart),
+        updateCart: ({ commit }, { cart }) => {
+            commit('CART', cart)
+        },
         initState: ({ commit }) => {
             import('./kernel')
                 .then((module) => {
-                    console.log("ytytyt")
                     module.onKernelKey('change:customerid', customerid => {
                         commit('CUSTOMERID', customerid);
                     });
@@ -37,7 +38,6 @@ export const store = new Vuex.Store({
                         commit('CART', cart);
                     });
                     const cart = module.getSharedKernel('cart');
-                    console.log("cart", cart)
                     if(cart != null){
                         commit('CART', cart);
                     }
