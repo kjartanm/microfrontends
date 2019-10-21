@@ -2,20 +2,20 @@
     import { onMount } from 'svelte';
     let customerid = null;
     let cart = [];
-    
+
     onMount(() => {
         import('./kernel').then((Module) => {
-        Module.onKernelKey('change:customerid', _customerid => {
+            Module.onKernelKey('change:customerid', _customerid => {
                 customerid = _customerid;
             });
-        Module.onKernelKey('change:cart', _cart => {
+            Module.onKernelKey('change:cart', _cart => {
                 cart = _cart;
             });
             cart = Module.getSharedKernel('cart');
         })
     })
 
-	export let title;
+    export let title;
 </script>
 <style>
     .icon {
@@ -28,7 +28,8 @@
         margin: 0;
     }
 
-    .nav-menu, .nav-order {
+    .nav-menu,
+    .nav-order {
         margin-left: 3em;
         position: relative;
         z-index: 10;
@@ -61,7 +62,6 @@
         padding: 10px;
         margin: 0;
     }
-
 </style>
 <wired-card class="layout-container">
     {#if !customerid}<a href="/"><img class="icon" src="/static/assets/24px.svg"> Login</a> - <h3>{title}</h3>{/if}

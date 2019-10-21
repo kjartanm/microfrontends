@@ -10,7 +10,6 @@ const emitter = mitt();
 
 export const updateSharedKernel = function (newState) {
     let oldval = null, change = false;
-    console.log("up", newState)
     if (typeof newState === 'object') {
         let obj = newState;
         for (let key in obj) {

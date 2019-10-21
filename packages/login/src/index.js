@@ -5,12 +5,10 @@ import { html } from 'lighterhtml-plus';
 import WiredElements from 'wired-elements';
 
 function LoginFE() {
-    console.log("loginXXX")
     const [customerid, setUserid] = useState(null);
     useEffect(() => {
         import('./kernel').then((Module) => {
             Module.onKernelKey('change:customerid', _customerid => {
-                console.log('_customerid', _customerid);
                 setUserid(_customerid);
             });
             setUserid(Module.getSharedKernel('customerid'));
