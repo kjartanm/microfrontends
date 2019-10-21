@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        cart: [{name: "Test"}]
+        cart: [],
+        customerid: null
     },
     mutations: {
         CUSTOMERID(state, customerid) {
@@ -17,7 +18,7 @@ export const store = new Vuex.Store({
         },
     },
     getters: {
-        userid: state => state.userid,
+        customerid: state => state.customerid,
         cart: state => state.cart,
     },
     actions: {

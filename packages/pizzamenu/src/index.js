@@ -7,14 +7,14 @@ const exampleItems = [
     { id: 10, name: 'Classic Hawaii', description: "The one that started it all!", price: 15 },
     { id: 11, name: 'Pineapple Bonanza', description: "Not just the ordinarily Hawaii :)", price: 20 },
     { id: 12, name: 'Citrus Crush', description: "Orange, Lime and Lemon.", price: 25 },
-    { id: 13, name: 'Apple Crust', description: "Cheese and Apple slices.", price: 30 },
+    { id: 13, name: 'Apple Cinnamon Crust', description: "The Cheesy American Apple Pizza Pie!", price: 30 },
     { id: 14, name: 'Pear & Fear', description: "Do you dare? Pear and chili sauce!", price: 35 },
     { id: 15, name: 'Banana Peanut Butter', description: "For the Elvis and Banana lovers.", price: 40 },
     { id: 16, name: 'Strawberry Field', description: "Strawberries, basil and garlic vinegar!", price: 50 },
-    { id: 17, name: 'The Full Fruit Salad', description: "Do you think you are worth it?", price: 75 },
+    { id: 17, name: 'The Full Fruit Salad', description: "Do you really think you are worth it?", price: 75 },
 ]
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const sillyFetch = async _customerid => {
+const sillyFetch = async () => {
     await sleep(500); 
     return exampleItems;
 }
@@ -27,11 +27,11 @@ const CatalogueProvider = (props) => {
     useEffect(() => {
         //This is where api calls for a pizzamenu could be handled, for now, faking it!
         const fetchPizzas = async () => {
-            const pizzaMenu = await sillyFetch(customerid);
+            const pizzaMenu = await sillyFetch();
             setItems(pizzaMenu);
         }
-        fetchPizzas();
-    }, []);
+        if( customerid !== null )fetchPizzas();
+    }, [customerid]);
 
     useEffect(() => {
         import('./kernel')
@@ -68,7 +68,7 @@ const CatalogueProvider = (props) => {
     }
 
     return (
-        <CatalogueContext.Provider value={[items, cart, addToCart, removeFromCart]}>
+        <CatalogueContext.Provider value={[customerid, items, cart, addToCart, removeFromCart]}>
             {props.children}
         </CatalogueContext.Provider>
     );
@@ -104,12 +104,15 @@ function Item({ description, name, id, price, cart, addToCart, removeFromCart })
 }
 
 function Items() {
-    const [items, cart, addToCart, removeFromCart] = useContext(CatalogueContext);
+    const [customerid, items, cart, addToCart, removeFromCart] = useContext(CatalogueContext);
     return (
-        <ul className="catalogue">
+        customerid !== null
+        ? <ul className="catalogue">
             {items.map(function (item) {
                 return <Item key={item.id} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} {...item} />;
             })}
-        </ul>);
+        </ul>
+        : <h3><a href="/">Log in to</a> Pizza Heaven before doing anything here!</h3>
+        );
 }
 export const ReactApp = (el) => ReactDOM.render(App(), el);

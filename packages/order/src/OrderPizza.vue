@@ -1,7 +1,13 @@
 <template>
     <section class="vue-module">
         <wired-card class="layout-container">
-            <div class="order">
+            <div v-if="!customerid" class="order">
+                <div class="order-head">
+                    <h2>{{ title }}</h2>
+                    <h3>But <a href="/">Log in to</a> Pizza Heaven before doing anything here!</h3>
+                </div>
+            </div>
+            <div v-else class="order">
                 <div class="order-head">
                     <h2>{{ title }}</h2>
                     <p style="padding: 0.5em; background-color: rgba(255,255,255,0.7)">Change of address? Please <a
@@ -13,7 +19,8 @@
                             <td class="order-name">{{ item.name }}</td>
                             <td class="order-number">
                                 <wired-button v-on:click="removeFromItem(item.menuid)">-</wired-button>
-                                <wired-card style="padding: 3px"><input class="order-number-input" type="text"  v-bind:value="item.number"></wired-card>
+                                <wired-card style="padding: 3px"><input class="order-number-input" type="text"
+                                        v-bind:value="item.number"></wired-card>
                                 <wired-button v-on:click="addToItem(item.menuid)">+</wired-button>
                             </td>
                             <td class="order-price">{{ item.price }},-</td>
@@ -94,11 +101,11 @@
                 if (item) {
                     item.number--;
                     let _cart = this.cart;
-                    if(item.number < 0){
+                    if (item.number < 0) {
                         _cart = this.cart.filter(item => item.menuid != id)
                     }
                     import('./kernel').then((Module) => {
-                        Module.updateSharedKernel({ cart:  _cart});
+                        Module.updateSharedKernel({ cart: _cart });
                     })
                 }
             },
@@ -115,6 +122,9 @@
         computed: {
             cart() {
                 return this.$store.getters.cart || [];
+            },
+            customerid() {
+                return this.$store.getters.customerid || null;
             },
             total() {
                 const reducer = (accumulator, item) => accumulator + (item.number * item.price);
