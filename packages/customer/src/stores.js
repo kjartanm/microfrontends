@@ -2,8 +2,8 @@ import { readable, derived } from 'svelte/store';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const _profile  = {
-    email: 'margheritadoe@pizzafan.com',
-    name: 'Margherita Doe',
+    email: 'margheritadoughstone@pizzafan.com',
+    name: 'Margherita Doughstone',
     address: {
         street: 'Cheesy Avenue',
         streetNumber: '101',
@@ -18,7 +18,7 @@ const _profile  = {
 };
 
 const sillyFetch = async _customerid => {
-    await sleep(1500);
+    await sleep(500);
     return _profile;
 }
 
@@ -32,7 +32,6 @@ export const customerid = readable(null, async set => {
         set(_customerid);
     });
     return () => Module.offKernelKey('change:customerid');
-
 });
 
 export const profile = derived(

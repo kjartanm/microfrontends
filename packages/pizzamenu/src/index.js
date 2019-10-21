@@ -13,6 +13,11 @@ const exampleItems = [
     { id: 16, name: 'Strawberry Field', description: "Strawberries, basil and garlic vinegar!", price: 50 },
     { id: 17, name: 'The Full Fruit Salad', description: "Do you think you are worth it?", price: 75 },
 ]
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sillyFetch = async _customerid => {
+    await sleep(500); 
+    return exampleItems;
+}
 
 const CatalogueProvider = (props) => {
     const [cart, setCart] = useState([]);
@@ -20,9 +25,13 @@ const CatalogueProvider = (props) => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        //This is where api calls for pizzamenu could be handled, for now, faking it!
-        setItems(exampleItems);
-    }, [customerid]);
+        //This is where api calls for a pizzamenu could be handled, for now, faking it!
+        const fetchPizzas = async () => {
+            const pizzaMenu = await sillyFetch(customerid);
+            setItems(pizzaMenu);
+        }
+        fetchPizzas();
+    }, []);
 
     useEffect(() => {
         import('./kernel')
