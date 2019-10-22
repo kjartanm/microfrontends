@@ -29,13 +29,6 @@
         {
             "src": "packages/customer/package.json",
             "use": "@now/static-build"
-        },
-        {
-            "src": "packages/teststatic/index.js",
-            "use": "@now/node",
-            "config": {
-                "includeFiles": ["packages/teststatic/public/**/*.html"]
-            }
         }
     ],
     "routes": [
@@ -49,7 +42,6 @@
         { "src": "/pizzamenu", "dest": "/packages/home/index.html" },
         { "src": "/orderpizza", "dest": "/packages/home/index.html" },
         { "src": "/profile", "dest": "/packages/home/index.html" },
-        { "src": "/test/.*", "dest": "/packages/teststatic/index.js" },
         { "src": "/", "dest": "/packages/home/index.html" }
     ]
 }
