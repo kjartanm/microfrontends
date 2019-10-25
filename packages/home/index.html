@@ -97,7 +97,6 @@
         }
 
         const guardPath = (context, commands) => {
-            console.log("hascustomerid", hascustomerid);
             if (hascustomerid !== null) {
                 return commands.component(paths[context.path]);
             }
