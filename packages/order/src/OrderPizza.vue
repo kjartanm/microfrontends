@@ -61,7 +61,7 @@
                 </div>
                 <div class="order-submit">
                     <h3>Total: {{total}},- </h3>
-                    <h3>Please check your order and <wired-button>submit!</wired-button>
+                    <h3>Please check your order and <wired-button style="background-color: lightsteelblue;">submit!</wired-button>
                     </h3>
 
                 </div>
