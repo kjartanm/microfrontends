@@ -1,11 +1,16 @@
 <script>
     import { onMount } from 'svelte';
+    import ProfileForm from './ProfileForm.svelte';
     import { customerid, profile } from './stores.js';
 
 
     onMount( () => {
 
     })
+
+	function handleSubmit(fromProfileForm) {
+        console.log( "update profile", fromProfileForm.detail );
+	}
 
     export let title;
 </script>
@@ -17,7 +22,7 @@
     {:else if $profile === null }  
     <h3>Loading profile ...</h3>
     {:else}
-    <h3>{$profile.name}</h3>
+    <ProfileForm on:submit={handleSubmit} {...$profile} />
     {/if}
     
 </wired-card>

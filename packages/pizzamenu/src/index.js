@@ -15,7 +15,7 @@ const exampleItems = [
 ]
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const sillyFetch = async () => {
-    await sleep(500); 
+    await sleep(250); 
     return exampleItems;
 }
 

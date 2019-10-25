@@ -6,19 +6,20 @@ const _profile  = {
     name: 'Margherita Doughstone',
     address: {
         street: 'Cheesy Avenue',
-        streetNumber: '101',
+        streetnumber: '101',
         city: 'Tipo',
-        postcode: '0'
+        postcode: '0000'
     },
     payment: {
         cardprovider: 'Calzone',
         cardnumber: 'xxxx-xxxx-xxxx-0001',
-        expirydate: 'July 2022'
+        expirydate: 'July 2022',
+        cvs: '123'
     }
 };
 
 const sillyFetch = async _customerid => {
-    await sleep(500);
+    await sleep(250);
     return _profile;
 }
 

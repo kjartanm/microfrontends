@@ -1,8 +1,8 @@
 import mitt from 'mitt'
 
 let cart = [
-    {menuid: 10, number: 1, name: 'Classic Hawaii', price: 15 },
-    {menuid: 13, number: 1, name: 'Apple Crust', price: 30}
+    //{menuid: 10, number: 1, name: 'Classic Hawaii', price: 15 },
+    //{menuid: 13, number: 1, name: 'Apple Crust', price: 30}
 ];
 
 let state = {customerid: null, cart };
