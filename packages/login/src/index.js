@@ -37,7 +37,7 @@ function LoginFE() {
                     <wired-button>Register</wired-button>
                 </wired-card>            
                 `
-            :html`<h2>(You are already logged in, go to <a href="/pizzamenu">menu</a> :)</h2>`
+            :html`<h2>(You are already logged in, go to the <a href="/pizzamenu">pizza menu</a> and order some pizzas :)</h2>`
 
         }
         </wired-card>
