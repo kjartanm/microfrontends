@@ -73,9 +73,10 @@
     </main>
     <footer>
         <wired-card class="layout-container">
-            <img style="vertical-align: middle" src="/static/assets/restaurant_menu-24px.svg"> 
-            Contact us: support@tropicalpizzas.com 
-            <span> # color legend: </span> 
+            <img style="vertical-align: middle" src="/static/assets/restaurant_menu-24px.svg">
+            Contact us: support@tropicalpizzas.com
+            <span> # color legend: </span>
+            <wired-card> vanilla </wired-card>
             <wired-card class="svelte-module"> svelte </wired-card>
             <wired-card class="vue-module"> vue </wired-card>
             <wired-card class="react-module"> react </wired-card>
@@ -88,16 +89,33 @@
         import { onKernelKey } from './modules/kernel';
         const mainOutlet = document.querySelector('main');
         const router = new Router(mainOutlet);
+        let hascustomerid = null;
+        const paths = {
+            '/pizzamenu': 'x-pizzamenu',
+            '/orderpizza': 'x-orderpizza',
+            '/profile': 'x-profile',
+        }
+
+        const guardPath = (context, commands) => {
+            console.log("hascustomerid", hascustomerid);
+            if (hascustomerid !== null) {
+                return commands.component(paths[context.path]);
+            }
+            const stubElement = commands.component('section');
+            stubElement.innerHTML = '<wired-card class="layout-container"><h2>Please <a href="/">log in</a> to access this Tropical Pizza Paradise!!</h2></wired-card>';
+            return stubElement;
+        };
 
         router.setRoutes([
             { path: '/', component: 'x-login' },
-            { path: '/pizzamenu', component: 'x-pizzamenu' },
-            { path: '/orderpizza', component: 'x-orderpizza' },
-            { path: '/profile', component: 'x-profile' }
+            { path: '/pizzamenu', action: guardPath },
+            { path: '/orderpizza', action: guardPath },
+            { path: '/profile', action: guardPath }
         ]);
 
         onKernelKey('change:customerid', customerid => {
-            if(customerid != null){
+            if (customerid != null) {
+                hascustomerid = customerid;
                 Router.go('/pizzamenu');
             }
         });
