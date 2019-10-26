@@ -1,18 +1,17 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-//import replace from 'rollup-plugin-replace';
-import svg from 'rollup-plugin-svg';
+import { terser } from 'rollup-plugin-terser';
 
 
-function stopDynamicImport () {
+function stopDynamicImport() {
     return {
-      name: 'stop-dynamic-import', // this name will show up in warnings and errors
-      resolveDynamicImport ( source ) {
-        return false
-      }
+        name: 'stop-dynamic-import', // this name will show up in warnings and errors
+        resolveDynamicImport(source) {
+            return false
+        }
     };
-  }
-  
+}
+
 
 export default {
     input: 'src/index.js',
@@ -22,8 +21,8 @@ export default {
     },
     plugins: [
         resolve(),
-        stopDynamicImport (),
+        stopDynamicImport(),
         commonjs(),
-        svg()
+        terser(),
     ]
 }

@@ -2,6 +2,7 @@ import vue from 'rollup-plugin-vue'
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
+import { terser } from 'rollup-plugin-terser';
 
 function stopDynamicImport () {
     return {
@@ -31,6 +32,7 @@ export default {
             extensions: ['*', '.js', '.vue', '.json']
         }),
         vue(/* options */),
-        commonjs()
+        commonjs(),
+        terser(),
     ]
 }

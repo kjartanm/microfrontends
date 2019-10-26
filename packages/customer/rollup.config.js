@@ -56,7 +56,7 @@ export default [
 				dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
 			}),
 			commonjs(),
-			production && terser()
+			terser()
 		],
 		watch: {
 			clearScreen: false
