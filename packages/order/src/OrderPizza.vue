@@ -33,6 +33,12 @@
                         </tr>
                     </table>
                 </div>
+                <div class="order-submit">
+                    <h3>Total: {{total}},- </h3>
+                    <h3>Please check your order and <wired-button style="background-color: lightsteelblue;">submit!
+                        </wired-button>
+                    </h3>
+                </div>
                 <div class="order-extra">
                     <wired-card>
                         <h3 class="order-title-extra">Add some extras!</h3>
@@ -58,12 +64,6 @@
                             <img v-else className="cart-ill" src="/static/assets/check-24px.svg"></img>
                         </div>
                     </wired-card>
-                </div>
-                <div class="order-submit">
-                    <h3>Total: {{total}},- </h3>
-                    <h3>Please check your order and <wired-button style="background-color: lightsteelblue;">submit!</wired-button>
-                    </h3>
-
                 </div>
             </div>
         </wired-card>

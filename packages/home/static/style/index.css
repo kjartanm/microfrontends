@@ -75,13 +75,16 @@ x-login {
     grid-template-columns: 450px 400px;
     column-gap: 50px;
     row-gap: 15px;
-    grid-template-areas:    "head head"
-                            "order extra"
-                            "order submit";
+    grid-template-areas:    "head submit"
+                            "order extra";
 }
 
 .order-head {
     grid-area: head;
+}
+
+.order-submit {
+    grid-area: submit;
 }
 
 .order-list {
