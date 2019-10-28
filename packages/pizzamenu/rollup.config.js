@@ -14,7 +14,7 @@ function stopDynamicImport () {
   }
 
 export default {
-    input: 'src/index.js',
+    input: 'src/index.js', 
     output: {
         file: 'public/pizzamenu.app.js',
         format: 'esm'

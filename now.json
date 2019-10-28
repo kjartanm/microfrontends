@@ -38,7 +38,7 @@
         { "src": "/modules/order", "dest": "/packages/order/order.app.js" },
         { "src": "/modules/profile", "dest": "/packages/customer/profile.app.js" },
         { "src": "/modules/header", "dest": "/packages/customer/header.app.js" },
-        { "src": "/static/(.*)", "dest": "/packages/home/static/$1" },
+        { "src": "/static/(.*)", "dest": "/packages/home/static/$1", "headers": { "Access-Control-Allow-Origin": "*", "cache-control": "s-maxage=60000"} },
         { "src": "/pizzamenu", "dest": "/packages/home/index.html" },
         { "src": "/orderpizza", "dest": "/packages/home/index.html" },
         { "src": "/profile", "dest": "/packages/home/index.html" },

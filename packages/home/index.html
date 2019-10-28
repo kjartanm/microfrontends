@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tropical Pizzas</title>
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" as="font" crossorigin>
-    <link rel="preload" href="./static/style/index.css" as="style" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" as="font" crossorigin="anonymous">
+    <link rel="preload" href="./static/style/index.css" as="style" crossorigin="anonymous">
     <link rel="preload" href="./modules/header" as="script" crossorigin>
     <link rel="preload" href="./modules/login" as="script" crossorigin>
+    <link rel="prefetch" href="./modules/profile" as="script" crossorigin>
+    <link rel="prefetch" href="./modules/order" as="script" crossorigin>
+    <link rel="prefetch" href="./modules/pizzamenu" as="script" crossorigin>
+    
 
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
     <link href="./static/style/index.css" rel="stylesheet">
@@ -90,7 +94,7 @@
     </footer>
 
     <script type="module">
-        import { Router } from 'https://unpkg.com/@vaadin/router';
+        import { Router } from 'https://unpkg.com/@vaadin/router@1.5.1/dist/vaadin-router.min.js';
         import { onKernelKey } from './modules/kernel';
         const mainOutlet = document.querySelector('main');
         const router = new Router(mainOutlet);
