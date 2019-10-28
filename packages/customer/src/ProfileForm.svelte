@@ -2,7 +2,7 @@
     import { createEventDispatcher } from 'svelte';
 
     $: invalidEmail = email.indexOf('@') === -1;
-    $: invalidDate = new Date(payment.expirydate).getUTCDate() < new Date().getUTCDate();
+    $: invalidDate = new Date(payment.expirydate) < Date.now();
     $: invalidPassword = (draft_password != password) || String(password).length < 8;
 
     let draft_password;
@@ -67,7 +67,7 @@
     </fieldset>
     <fieldset class="fields-payment">
         <legend>Payment</legend>
-        <div class="field" class:invalid-password={invalidDate}>
+        <div class="field" class:invalid-date={invalidDate}>
             <label class="form-label">Provider</label>
             <wired-card class="input-border"><input class="form-input" bind:value={payment.cardprovider} type="text">
             </wired-card>
@@ -191,6 +191,7 @@
         display: inline-block;
         position: absolute;
         right: 6px;
+        top: 25px;
     }
 
     .submit {

@@ -1,0 +1,55 @@
+{
+    "name": "Easy Peasy Microfrontends",
+    "version": 2,
+    "builds": [
+        {
+            "src": "packages/home/index.html",
+            "use": "@now/static"
+        },
+        {
+            "src": "packages/home/static/**/*.*",
+            "use": "@now/static"
+        },
+        {
+            "src": "packages/pizzamenu/package.json",
+            "use": "@now/static-build"
+        },
+        {
+            "src": "packages/kernel/package.json",
+            "use": "@now/static-build"
+        },
+        {
+            "src": "packages/login/package.json",
+            "use": "@now/static-build"
+        },
+        {
+            "src": "packages/order/package.json",
+            "use": "@now/static-build"
+        },
+        {
+            "src": "packages/customer/package.json",
+            "use": "@now/static-build"
+        },
+        {
+            "src": "packages/teststatic/index.js",
+            "use": "@now/node",
+            "config": {
+                "includeFiles": ["packages/teststatic/public/**/*.html"]
+            }
+        }
+    ],
+    "routes": [
+        { "src": "/modules/pizzamenu", "dest": "/packages/pizzamenu/pizzamenu.app.js" },
+        { "src": "/modules/kernel", "dest": "/packages/kernel/kernel.js" },
+        { "src": "/modules/login", "dest": "/packages/login/login.app.js" },
+        { "src": "/modules/order", "dest": "/packages/order/order.app.js" },
+        { "src": "/modules/profile", "dest": "/packages/customer/profile.app.js" },
+        { "src": "/modules/header", "dest": "/packages/customer/header.app.js" },
+        { "src": "/static/(.*)", "dest": "/packages/home/static/$1" },
+        { "src": "/pizzamenu", "dest": "/packages/home/index.html" },
+        { "src": "/orderpizza", "dest": "/packages/home/index.html" },
+        { "src": "/profile", "dest": "/packages/home/index.html" },
+        { "src": "/test/.*", "dest": "/packages/teststatic/index.js" },
+        { "src": "/", "dest": "/packages/home/index.html" }
+    ]
+}
